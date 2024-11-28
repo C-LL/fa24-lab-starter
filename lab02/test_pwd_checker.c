@@ -21,7 +21,7 @@ int main() {
     const char *test3_last = "Brown";
     const char *test3_pwd = "QLRIOW815N";
     bool test3 = check_password(test3_first, test3_last, test3_pwd);
-    assert(!test3);
+    assert(!test3); 
 
     const char *test4_first = "Wei";
     const char *test4_last = "Zhang";

@@ -11,7 +11,7 @@ main:
     # load the value of exp into a1
     la a1 exp
     lw a1 0(a1)
-
+    
     # call ex2
     jal ra ex2
 
@@ -32,6 +32,7 @@ main:
 #     where ^ is the exponent operator, not XOR
 ex2:
     # Note: Add code BELOW without altering existing lines.
+    addi sp, sp -8
     sw s0 0(sp)
 
     # return 1 if a1 == 0
@@ -53,5 +54,5 @@ ex2_zero_case:
 
 ex2_end:
     lw s0 0(sp)
-
+    addi sp, sp 8
     jr ra

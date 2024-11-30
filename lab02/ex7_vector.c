@@ -106,17 +106,18 @@ void vector_set(vector_t *v, size_t loc, int value) {
      */
 
     /* YOUR CODE HERE */
-    if(loc < 0){
-    	allocation_failed();
-    } 
-    while (loc >= v->size - 1){
-    	v->size *= 2;
-    }
-    v->data = realloc(v->data, v->size * sizeof(int));
-    for(int i = 0; i < v->size; i++){
-	if(!v->data[i]){
-	      v->data[i] = 0;
-	}
+    if (loc >= v->size) {
+        size_t old_size = v->size;
+        while (loc >= v->size) {
+            v->size *= 2;
+        }
+        v->data = realloc(v->data, v->size * sizeof(int));
+        if (v->data == NULL) {
+            allocation_failed();
+        }
+        for (size_t i = old_size; i < v->size; i++) {
+            v->data[i] = 0;
+        }
     }
     v->data[loc] = value;
 }

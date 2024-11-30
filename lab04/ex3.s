@@ -32,7 +32,8 @@ main:
 #     where ^ is the exponent operator, not XOR
 ex3:
     # Note: Add code BELOW without altering existing lines.
-
+    addi sp, sp -8
+    
     # return 1 if a1 == 0
     beq a1 x0 ex3_zero_case
 
@@ -46,7 +47,7 @@ ex3:
                   # (which contains the value of a0)
 
     j ex3_end
-
+    addi sp, sp 8
     # Note: Add code ABOVE without altering existing lines.
 
 ex3_zero_case:

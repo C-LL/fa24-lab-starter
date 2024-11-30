@@ -2,28 +2,31 @@
 
 .text
 main:
-    # This program will fill an array of size 10 with 0's
-
     # Allocate an array of size 10
-    li a0 40   # 10 ints, 4 bytes each
-    jal malloc # malloc is defined in utils.s
-    mv t0 a0   # the pointer is returned in a0
+    li a0, 40       # 10 ints, 4 bytes each
+    jal malloc      # Call malloc to allocate memory
+    mv t0, a0       # Save the original pointer in s0
 
     # Fill the array with 0's
-    li t1 0  # t1 is the index
-    li t2 10 # t2 is the size of the array
+    li t1, 0        # t1 is the index
+    li t2, 10       # t2 is the size of the array
 
 loop:
     # Store 0 at the current index
-    sw x0 0(t0)
+    sw x0, 0(a0)
     # Increment the index
-    addi t1 t1 1
+    addi t1, t1, 1
     # Increment the pointer
-    addi t0 t0 4
+    addi a0, a0, 4
     # Check if we are done
-    # If not, loop
-    bge t2 t1 loop
+    blt t1, t2, loop
+
+    # Restore the original pointer
+    mv a0, t0
+
+    # Free the memory
+    jal free        # Call free to release the allocated memory
 
     # Exit the program
-    li a0 0
+    li a0, 0
     jal exit
